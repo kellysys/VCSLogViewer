@@ -1,6 +1,6 @@
 ﻿namespace VCSLogViewer
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -31,19 +31,18 @@
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lbFiles = new System.Windows.Forms.ListBox();
-            this.btnOpen = new System.Windows.Forms.Button();
-            this.tabControl = new System.Windows.Forms.TabControl();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnFindPrev = new System.Windows.Forms.Button();
-            this.btnHighlight = new System.Windows.Forms.Button();
             this.btnFindNext = new System.Windows.Forms.Button();
-            this.tbHighlight = new System.Windows.Forms.TextBox();
             this.tbFindText = new System.Windows.Forms.TextBox();
+            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.vS2015DarkTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme();
             this.cmsTapPage = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.defaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,20 +59,21 @@
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.lbFiles, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnOpen, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tabControl, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.dockPanel1, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 27);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1038, 471);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1102, 536);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // lbFiles
@@ -89,79 +89,36 @@
             this.lbFiles.TabIndex = 2;
             this.lbFiles.DoubleClick += new System.EventHandler(this.lbFiles_DoubleClick);
             // 
-            // btnOpen
-            // 
-            this.btnOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpen.Location = new System.Drawing.Point(3, 3);
-            this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(194, 23);
-            this.btnOpen.TabIndex = 0;
-            this.btnOpen.Text = "Open Folder";
-            this.btnOpen.UseVisualStyleBackColor = true;
-            this.btnOpen.Click += new System.EventHandler(this.btnOpenFolder_Click);
-            // 
-            // tabControl
-            // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Location = new System.Drawing.Point(203, 33);
-            this.tabControl.Name = "tabControl";
-            this.tableLayoutPanel1.SetRowSpan(this.tabControl, 2);
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(832, 435);
-            this.tabControl.TabIndex = 3;
-            this.tabControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tabControl_MouseUp);
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnFindPrev);
-            this.panel1.Controls.Add(this.btnHighlight);
             this.panel1.Controls.Add(this.btnFindNext);
-            this.panel1.Controls.Add(this.tbHighlight);
             this.panel1.Controls.Add(this.tbFindText);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 333);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(194, 135);
+            this.panel1.Size = new System.Drawing.Size(194, 200);
             this.panel1.TabIndex = 4;
             // 
             // btnFindPrev
             // 
-            this.btnFindPrev.Location = new System.Drawing.Point(35, 32);
+            this.btnFindPrev.Location = new System.Drawing.Point(3, 32);
             this.btnFindPrev.Name = "btnFindPrev";
-            this.btnFindPrev.Size = new System.Drawing.Size(75, 23);
+            this.btnFindPrev.Size = new System.Drawing.Size(91, 23);
             this.btnFindPrev.TabIndex = 1;
             this.btnFindPrev.Text = "< Find";
             this.btnFindPrev.UseVisualStyleBackColor = true;
             this.btnFindPrev.Click += new System.EventHandler(this.btnFindPrev_Click);
             // 
-            // btnHighlight
-            // 
-            this.btnHighlight.Location = new System.Drawing.Point(116, 90);
-            this.btnHighlight.Name = "btnHighlight";
-            this.btnHighlight.Size = new System.Drawing.Size(75, 23);
-            this.btnHighlight.TabIndex = 1;
-            this.btnHighlight.Text = "Highlight";
-            this.btnHighlight.UseVisualStyleBackColor = true;
-            this.btnHighlight.Click += new System.EventHandler(this.btnHighlight_Click);
-            // 
             // btnFindNext
             // 
-            this.btnFindNext.Location = new System.Drawing.Point(116, 32);
+            this.btnFindNext.Location = new System.Drawing.Point(100, 32);
             this.btnFindNext.Name = "btnFindNext";
-            this.btnFindNext.Size = new System.Drawing.Size(75, 23);
+            this.btnFindNext.Size = new System.Drawing.Size(91, 23);
             this.btnFindNext.TabIndex = 1;
             this.btnFindNext.Text = "Find >";
             this.btnFindNext.UseVisualStyleBackColor = true;
             this.btnFindNext.Click += new System.EventHandler(this.btnFindNext_Click);
-            // 
-            // tbHighlight
-            // 
-            this.tbHighlight.Location = new System.Drawing.Point(3, 61);
-            this.tbHighlight.Name = "tbHighlight";
-            this.tbHighlight.Size = new System.Drawing.Size(188, 23);
-            this.tbHighlight.TabIndex = 0;
             // 
             // tbFindText
             // 
@@ -169,6 +126,21 @@
             this.tbFindText.Name = "tbFindText";
             this.tbFindText.Size = new System.Drawing.Size(188, 23);
             this.tbFindText.TabIndex = 0;
+            this.tbFindText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbFindText_KeyUp);
+            // 
+            // dockPanel1
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.dockPanel1, 2);
+            this.dockPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dockPanel1.DockBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.dockPanel1.Location = new System.Drawing.Point(203, 33);
+            this.dockPanel1.Name = "dockPanel1";
+            this.dockPanel1.Padding = new System.Windows.Forms.Padding(6);
+            this.tableLayoutPanel1.SetRowSpan(this.dockPanel1, 2);
+            this.dockPanel1.ShowAutoHideContentOnHover = false;
+            this.dockPanel1.Size = new System.Drawing.Size(896, 500);
+            this.dockPanel1.TabIndex = 5;
+            this.dockPanel1.Theme = this.vS2015DarkTheme1;
             // 
             // cmsTapPage
             // 
@@ -186,9 +158,9 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 501);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 566);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1038, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1102, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -199,23 +171,31 @@
             this.colorToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1038, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1102, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openFolderToolStripMenuItem,
             this.toolStripMenuItem1});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // openFolderToolStripMenuItem
+            // 
+            this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
+            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.openFolderToolStripMenuItem.Text = "&Open Folder";
+            this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(93, 22);
-            this.toolStripMenuItem1.Text = "Exit";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(140, 22);
+            this.toolStripMenuItem1.Text = "&Exit";
             // 
             // colorToolStripMenuItem
             // 
@@ -224,8 +204,8 @@
             this.dark1ToolStripMenuItem,
             this.dark2ToolStripMenuItem});
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            this.colorToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.colorToolStripMenuItem.Text = "Color";
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.colorToolStripMenuItem.Text = "Theme";
             // 
             // defaultToolStripMenuItem
             // 
@@ -248,17 +228,17 @@
             this.dark2ToolStripMenuItem.Text = "Dark 2";
             this.dark2ToolStripMenuItem.Click += new System.EventHandler(this.dark2ToolStripMenuItem_Click);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1038, 523);
+            this.ClientSize = new System.Drawing.Size(1102, 588);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainForm";
+            this.Text = "Log Viewer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -274,17 +254,13 @@
         #endregion
 
         private TableLayoutPanel tableLayoutPanel1;
-        private Button btnOpen;
         private ListBox lbFiles;
-        private TabControl tabControl;
         private ContextMenuStrip cmsTapPage;
         private ToolStripMenuItem closeToolStripMenuItem;
         private Panel panel1;
         private Button btnFindPrev;
         private Button btnFindNext;
         private TextBox tbFindText;
-        private Button btnHighlight;
-        private TextBox tbHighlight;
         private StatusStrip statusStrip1;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
@@ -293,5 +269,8 @@
         private ToolStripMenuItem defaultToolStripMenuItem;
         private ToolStripMenuItem dark1ToolStripMenuItem;
         private ToolStripMenuItem dark2ToolStripMenuItem;
+        private ToolStripMenuItem openFolderToolStripMenuItem;
+        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
+        private WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme vS2015DarkTheme1;
     }
 }

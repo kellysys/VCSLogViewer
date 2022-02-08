@@ -132,9 +132,6 @@ namespace VCSLogViewer.Controls
 
                     while (IndexQ.TryDequeue(out int index))
                     {
-                        //if (min == 0) min = index;
-                        //if (max == 0) max = index;
-
                         min = index < min ? index : min;
                         max = index > max ? index : max;
                     }
@@ -145,14 +142,16 @@ namespace VCSLogViewer.Controls
                         {
                             Invoke(new MethodInvoker(delegate
                             {
+
                                 UpdateSelectedColor(min, max);
+
                             }));
                         });
                     }
                 }
                 catch (Exception ex)
                 {
-
+                    DebugLog(ex.Message);
                 }
                 finally
                 {
@@ -223,6 +222,31 @@ namespace VCSLogViewer.Controls
             return (firstIndex, lastIndex);
         }
 
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                if (e.KeyCode == Keys.OemPeriod)
+                {
+                    FindNext(SelectedText);
+                    return;
+                }
+
+                if (e.KeyCode == Keys.Oemcomma)
+                {
+                    FindPrev(SelectedText);
+                    return;
+                }
+            }
+
+            base.OnKeyDown(e);
+        }
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+
+            base.OnKeyUp(e);
+        }
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -249,6 +273,9 @@ namespace VCSLogViewer.Controls
 
             findStart = SelectionStart + 1;
             Find(text, findStart, TextLength, RichTextBoxFinds.None);
+
+            //(int s, int l) = (SelectionStart, SelectionLength);
+            //(SelectionStart, SelectionLength) = (s, l);
         }
 
         public void FindPrev(string text)
@@ -291,13 +318,12 @@ namespace VCSLogViewer.Controls
         {
             try
             {
+                SuspendLayout();
+
                 if (ColorDic.Count == 0)
                     return;
 
                 UpdateLock = true;
-
-                SuspendLayout();
-                Selectable = false;
 
                 Cursor = Cursors.WaitCursor;
 
@@ -324,9 +350,9 @@ namespace VCSLogViewer.Controls
 
                         match = match.NextMatch();
                     }
-                    
                 }
 
+                DeselectAll();
                 DebugLog($"Refreshed ({first}-{last})");
             }
             catch (Exception ex)
@@ -337,9 +363,7 @@ namespace VCSLogViewer.Controls
             {
                 ResumeLayout();
                 Cursor = Cursors.Default;
-                DeselectAll();
                 UpdateLock = false;
-                Selectable = true;
             }
         }
     }
