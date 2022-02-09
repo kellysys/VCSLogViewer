@@ -14,11 +14,21 @@ namespace VCSLogViewer.Controls
 {
     internal class LogTextBox : RichTextBox
     {
-        Color backColor = Color.White;
-        Color foreColor = Color.Black;
+        private Color backColor = Color.White;
+        private Color foreColor = Color.Black;
 
-        Dictionary<string, Color> ColorDic = new Dictionary<string, Color>();
-        ConcurrentQueue<int> IndexQ = new ConcurrentQueue<int>();
+        private Dictionary<string, Color> ColorDic = new Dictionary<string, Color>();
+        private ConcurrentQueue<int> IndexQ = new ConcurrentQueue<int>();
+
+        private const int MaxFindLength = 3;
+        private string FindText = "";
+        private bool UpdateLock = false;
+
+        private int FirstIndex;
+        private int LastIndex;
+        private int SavedFirstIndex;
+        private int SavedLastIndex;
+        private int StartLastSize;
 
         public LogTextBox()
         {
@@ -98,17 +108,54 @@ namespace VCSLogViewer.Controls
             base.WndProc(ref m);
         }
 
-        public int FirstIndex { get; private set; }
-        public int LastIndex { get; private set; }
-        public int SavedFirstIndex { get; private set; }
-        public int SavedLastIndex { get; private set; }
-        public int StartLastSize { get; private set; }
-
         protected override void OnVScroll(EventArgs e)
         {
             base.OnVScroll(e);
             if (!UpdateLock)
                 UpdateIndex();
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.Control && !string.IsNullOrEmpty(FindText))
+            {
+                if (e.KeyCode == Keys.OemPeriod)
+                {
+                    FindNext(FindText);
+                    return;
+                }
+
+                if (e.KeyCode == Keys.Oemcomma)
+                {
+                    FindPrev(FindText);
+                    return;
+                }
+            }
+
+            base.OnKeyDown(e);
+        }
+
+        protected override void OnSelectionChanged(EventArgs e)
+        {
+            FindText = SelectionLength > MaxFindLength ? SelectedText : string.Empty;
+
+            base.OnSelectionChanged(e);
+        }
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                int curPos = GetCharIndexFromPosition(e.Location);
+
+                if (SelectionStart > curPos || SelectionStart + SelectionLength < curPos)
+                {
+                    SelectionStart = curPos;
+                    SelectionLength = 0;
+                }
+            }
+
+            base.OnMouseDown(e);
         }
 
         public void Init()
@@ -222,51 +269,10 @@ namespace VCSLogViewer.Controls
             return (firstIndex, lastIndex);
         }
 
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            if (e.Control)
-            {
-                if (e.KeyCode == Keys.OemPeriod)
-                {
-                    FindNext(SelectedText);
-                    return;
-                }
-
-                if (e.KeyCode == Keys.Oemcomma)
-                {
-                    FindPrev(SelectedText);
-                    return;
-                }
-            }
-
-            base.OnKeyDown(e);
-        }
-        protected override void OnKeyUp(KeyEventArgs e)
-        {
-
-            base.OnKeyUp(e);
-        }
-
-        protected override void OnMouseDown(MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                int curPos = GetCharIndexFromPosition(e.Location);
-
-                if (SelectionStart > curPos || SelectionStart + SelectionLength < curPos)
-                {
-                    SelectionStart = curPos;
-                    SelectionLength = 0;
-                }
-            }
-
-            base.OnMouseDown(e);
-        }
-
         int findStart = 0;
         public void FindNext(string text)
         {
-            if (text == null || text.Length < 3)
+            if (text == null || text.Length < MaxFindLength)
                 return;
 
             Focus();
@@ -280,7 +286,7 @@ namespace VCSLogViewer.Controls
 
         public void FindPrev(string text)
         {
-            if (text == null || text.Length < 3)
+            if (text == null || text.Length < MaxFindLength)
                 return;
 
             Focus();
@@ -295,7 +301,7 @@ namespace VCSLogViewer.Controls
             {
                 Regex regex = new Regex(SelectedText);
 
-                if (SelectionLength < 3)
+                if (SelectionLength < MaxFindLength)
                     return;
 
                 if (ColorDic.ContainsKey(SelectedText))
@@ -313,7 +319,6 @@ namespace VCSLogViewer.Controls
             }
         }
 
-        bool UpdateLock = false;
         private void UpdateSelectedColor(int start, int end)
         {
             try
