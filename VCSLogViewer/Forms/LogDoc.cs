@@ -13,9 +13,13 @@ namespace VCSLogViewer.Forms
 {
     public partial class LogDoc : BaseDockContent
     {
+        public Action<string> FindTextSelected;
+
         public LogDoc()
         {
             InitializeComponent();
+
+            tbLog.FindTextSelected += ((e) => FindTextSelected?.Invoke(e));
         }
 
         public void Init(string title, string path, bool removeDate = true, bool removeTimezone = true)

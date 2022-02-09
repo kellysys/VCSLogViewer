@@ -34,6 +34,13 @@ namespace VCSLogViewer
                     ld.Init(fm.Name, fm.Path);
                     ld.SetTheme(themeColor);
                     ld.Show(dockPanel1, DockState.Document);
+                    ld.FindTextSelected += ((e) =>
+                    {
+                        Invoke(new MethodInvoker(delegate
+                        {
+                            tbFindText.Text = e;
+                        }));
+                    });
                 }
             }
             catch (Exception ex)

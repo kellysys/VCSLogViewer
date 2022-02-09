@@ -14,6 +14,8 @@ namespace VCSLogViewer.Controls
 {
     internal class LogTextBox : RichTextBox
     {
+        public Action<string> FindTextSelected;
+
         private Color backColor = Color.White;
         private Color foreColor = Color.Black;
 
@@ -22,6 +24,8 @@ namespace VCSLogViewer.Controls
 
         private const int MaxFindLength = 3;
         private string FindText = "";
+        private int FindIndex = 0;
+        private int FindLength = 0;
         private bool UpdateLock = false;
 
         private int FirstIndex;
@@ -40,6 +44,7 @@ namespace VCSLogViewer.Controls
 
             ContextMenuStrip = new ContextMenuStrip();
 
+            ToolStripMenuItem tsFind = new ToolStripMenuItem() { Text = "Find" };
             ToolStripMenuItem tsRemoveBefore = new ToolStripMenuItem() { Text = "Remove Before" };
             ToolStripMenuItem tsClear = new ToolStripMenuItem() { Text = "Clear Color" };
             ToolStripMenuItem tsSetColor = new ToolStripMenuItem() { Text = "Set Color" };
@@ -57,6 +62,7 @@ namespace VCSLogViewer.Controls
             tsSetColor.DropDownItems.Add(tsColor4);
             tsSetColor.DropDownItems.Add(tsColor5);
 
+            ContextMenuStrip?.Items.Add(tsFind);
             ContextMenuStrip?.Items.Add(tsRemoveBefore);
             ContextMenuStrip?.Items.Add(tsClear);
             ContextMenuStrip?.Items.Add(new ToolStripSeparator());
@@ -68,6 +74,19 @@ namespace VCSLogViewer.Controls
             tsColor3.Click += (s, e) => NewColor(Color.GreenYellow);
             tsColor4.Click += (s, e) => NewColor(Color.SkyBlue);
             tsColor5.Click += (s, e) => NewColor(Color.Yellow);
+
+            tsFind.Click += (s, e) =>
+            {
+                if (SelectionLength > MaxFindLength)
+                {
+                    FindText = SelectedText;
+                    FindTextSelected?.Invoke(FindText);
+                }
+                else
+                {
+                    FindText = string.Empty;
+                }
+            };
 
             tsRemoveBefore.Click += (s, e) =>
             {
@@ -83,7 +102,7 @@ namespace VCSLogViewer.Controls
 
             Task.Run(() =>
             {
-                UpdateQ();
+                SelectMinMax();
             });
         }
 
@@ -135,13 +154,6 @@ namespace VCSLogViewer.Controls
             base.OnKeyDown(e);
         }
 
-        protected override void OnSelectionChanged(EventArgs e)
-        {
-            FindText = SelectionLength > MaxFindLength ? SelectedText : string.Empty;
-
-            base.OnSelectionChanged(e);
-        }
-
         protected override void OnMouseDown(MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -166,45 +178,6 @@ namespace VCSLogViewer.Controls
         private void DebugLog(string log)
         {
             Debug.Print($"[{DateTime.Now:HH:MM:ss-fff}] {log}");
-        }
-
-        private async void UpdateQ()
-        {
-            while (true)
-            {
-                try
-                {
-                    int min = int.MaxValue;
-                    int max = 0;
-
-                    while (IndexQ.TryDequeue(out int index))
-                    {
-                        min = index < min ? index : min;
-                        max = index > max ? index : max;
-                    }
-
-                    if (min != int.MaxValue || max != 0)
-                    {
-                        await Task.Run(() =>
-                        {
-                            Invoke(new MethodInvoker(delegate
-                            {
-
-                                UpdateSelectedColor(min, max);
-
-                            }));
-                        });
-                    }
-                }
-                catch (Exception ex)
-                {
-                    DebugLog(ex.Message);
-                }
-                finally
-                {
-                    Thread.Sleep(100);
-                }
-            }
         }
 
         private void UpdateIndex()
@@ -269,6 +242,7 @@ namespace VCSLogViewer.Controls
             return (firstIndex, lastIndex);
         }
 
+        bool isFind = false;
         int findStart = 0;
         public void FindNext(string text)
         {
@@ -278,10 +252,13 @@ namespace VCSLogViewer.Controls
             Focus();
 
             findStart = SelectionStart + 1;
-            Find(text, findStart, TextLength, RichTextBoxFinds.None);
+            FindIndex = Find(text, findStart, TextLength, RichTextBoxFinds.None);
+            FindLength = text.Length;
 
+            SelectionColor = Color.Red;
             //(int s, int l) = (SelectionStart, SelectionLength);
             //(SelectionStart, SelectionLength) = (s, l);
+            isFind = true;
         }
 
         public void FindPrev(string text)
@@ -292,7 +269,11 @@ namespace VCSLogViewer.Controls
             Focus();
 
             findStart = SelectionStart - 1;
-            Find(text, 0, findStart, RichTextBoxFinds.Reverse);
+            FindIndex = Find(text, 0, findStart, RichTextBoxFinds.Reverse);
+            FindLength = text.Length;
+
+            SelectionColor = Color.Red;
+            isFind = true;
         }
 
         private void NewColor(Color color)
@@ -316,6 +297,43 @@ namespace VCSLogViewer.Controls
             catch (Exception ex)
             {
                 DebugLog(ex.Message);
+            }
+        }
+
+        private async void SelectMinMax()
+        {
+            while (true)
+            {
+                try
+                {
+                    int min = int.MaxValue;
+                    int max = 0;
+
+                    while (IndexQ.TryDequeue(out int index))
+                    {
+                        min = index < min ? index : min;
+                        max = index > max ? index : max;
+                    }
+
+                    if (min != int.MaxValue || max != 0)
+                    {
+                        await Task.Run(() =>
+                        {
+                            Invoke(new MethodInvoker(delegate
+                            {
+                                UpdateSelectedColor(min, max);
+                            }));
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    DebugLog(ex.Message);
+                }
+                finally
+                {
+                    Thread.Sleep(100);
+                }
             }
         }
 
@@ -357,7 +375,17 @@ namespace VCSLogViewer.Controls
                     }
                 }
 
-                DeselectAll();
+                if (isFind)
+                {
+                    SelectionStart = FindIndex;
+                    SelectionLength = FindLength;
+                    isFind = false;
+                }
+                else
+                {
+                    SelectionLength = 0;
+                }
+                
                 DebugLog($"Refreshed ({first}-{last})");
             }
             catch (Exception ex)
