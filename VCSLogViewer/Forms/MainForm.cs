@@ -31,42 +31,14 @@ namespace VCSLogViewer
             nav.Show(dockPanel1, DockState.DockLeft);
         }
 
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void defaultToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //themeColor = ThemeColor.Default;
-            UpdateThemeColor();
-        }
-
-        private void dark1ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //themeColor = ThemeColor.Dark1;
-            UpdateThemeColor();
-        }
-
-        private void dark2ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //themeColor = ThemeColor.Dark2;
-            UpdateThemeColor();
-        }
-
-        private void UpdateThemeColor()
-        {
-            //foreach (LogTabPage c in tabControl.Controls)
-            //{
-            //    c.SetTheme(themeColor);
-            //}
-        }
-
         private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             nav.OpenFolder();
         }
 
-
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

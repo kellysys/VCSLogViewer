@@ -31,16 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.vS2015DarkTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.posStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.defaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dark1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dark2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.posStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -55,11 +51,16 @@
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // posStatusLabel
+            // 
+            this.posStatusLabel.Name = "posStatusLabel";
+            this.posStatusLabel.Size = new System.Drawing.Size(121, 17);
+            this.posStatusLabel.Text = "toolStripStatusLabel1";
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.colorToolStripMenuItem});
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1102, 24);
@@ -78,46 +79,16 @@
             // openFolderToolStripMenuItem
             // 
             this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
-            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openFolderToolStripMenuItem.Text = "&Open Folder";
             this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(140, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem1.Text = "&Exit";
-            // 
-            // colorToolStripMenuItem
-            // 
-            this.colorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.defaultToolStripMenuItem,
-            this.dark1ToolStripMenuItem,
-            this.dark2ToolStripMenuItem});
-            this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            this.colorToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
-            this.colorToolStripMenuItem.Text = "Theme";
-            // 
-            // defaultToolStripMenuItem
-            // 
-            this.defaultToolStripMenuItem.Name = "defaultToolStripMenuItem";
-            this.defaultToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.defaultToolStripMenuItem.Text = "Default";
-            this.defaultToolStripMenuItem.Click += new System.EventHandler(this.defaultToolStripMenuItem_Click);
-            // 
-            // dark1ToolStripMenuItem
-            // 
-            this.dark1ToolStripMenuItem.Name = "dark1ToolStripMenuItem";
-            this.dark1ToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.dark1ToolStripMenuItem.Text = "Dark 1";
-            this.dark1ToolStripMenuItem.Click += new System.EventHandler(this.dark1ToolStripMenuItem_Click);
-            // 
-            // dark2ToolStripMenuItem
-            // 
-            this.dark2ToolStripMenuItem.Name = "dark2ToolStripMenuItem";
-            this.dark2ToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.dark2ToolStripMenuItem.Text = "Dark 2";
-            this.dark2ToolStripMenuItem.Click += new System.EventHandler(this.dark2ToolStripMenuItem_Click);
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // dockPanel1
             // 
@@ -132,12 +103,6 @@
             this.dockPanel1.Size = new System.Drawing.Size(1102, 542);
             this.dockPanel1.TabIndex = 5;
             this.dockPanel1.Theme = this.vS2015DarkTheme1;
-            // 
-            // posStatusLabel
-            // 
-            this.posStatusLabel.Name = "posStatusLabel";
-            this.posStatusLabel.Size = new System.Drawing.Size(121, 17);
-            this.posStatusLabel.Text = "toolStripStatusLabel1";
             // 
             // MainForm
             // 
@@ -167,10 +132,6 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem toolStripMenuItem1;
-        private ToolStripMenuItem colorToolStripMenuItem;
-        private ToolStripMenuItem defaultToolStripMenuItem;
-        private ToolStripMenuItem dark1ToolStripMenuItem;
-        private ToolStripMenuItem dark2ToolStripMenuItem;
         private ToolStripMenuItem openFolderToolStripMenuItem;
         private WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme vS2015DarkTheme1;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
