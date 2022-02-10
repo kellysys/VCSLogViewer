@@ -175,8 +175,28 @@ namespace VCSLogViewer.Controls
             base.OnMouseDown(e);
         }
 
-        public void Init()
+        public async void Init(string path)
         {
+            await Task.Delay(100);
+            Cursor = Cursors.WaitCursor;
+            DebugLog("Start Init");
+
+            using var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var bs = new BufferedStream(fs);
+            using var sr = new StreamReader(bs, Encoding.Default);
+
+            string? line;
+            StringBuilder sb = new StringBuilder();
+
+            while ((line = sr.ReadLine()) != null)
+            {
+                sb.AppendLine(line);
+            }
+
+            Text = sb.ToString();
+
+            Cursor = Cursors.Default;
+            DebugLog("End Init");
             UpdateIndex();
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -88,22 +89,15 @@ namespace VCSLogViewer.Forms
 
                 if (fm != null)
                 {
-                    Cursor = Cursors.WaitCursor;
-
                     LogDoc ld = new LogDoc();
-                    ld.Init2(fm.Name, fm.Path);
-                    ld.SetTheme(ThemeColor.Default);
                     ld.Show(dock, DockState.Document);
-
+                    ld.SetTheme(ThemeColor.Default);
+                    ld.Init(fm.Name, fm.Path);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Cursor = Cursors.Default;
             }
         }
 
