@@ -13,10 +13,8 @@ using VCSLogViewer.Models;
 
 namespace VCSLogViewer.Controls
 {
-    internal class LogTextBox : RichTextBox
+    public class LogTextBox : RichTextBox
     {
-        public Action<string>? FindTextSelected;
-
         private Color backColor = Color.White;
         private Color foreColor = Color.Black;
 
@@ -81,7 +79,7 @@ namespace VCSLogViewer.Controls
                 if (SelectionLength > MaxFindLength)
                 {
                     FindText = SelectedText;
-                    FindTextSelected?.Invoke(FindText);
+                    LogService.Instance.ActionFindTextSelected(this, FindText);
                 }
                 else
                 {
@@ -133,6 +131,12 @@ namespace VCSLogViewer.Controls
             base.OnVScroll(e);
             if (!UpdateLock)
                 UpdateIndex();
+        }
+
+        protected override void OnSelectionChanged(EventArgs e)
+        {
+            LogService.Instance.ActionPsitionChanged(this, SelectionStart, SelectionLength, GetLineFromCharIndex(SelectionStart));
+            base.OnSelectionChanged(e);
         }
 
         protected override void OnKeyDown(KeyEventArgs e)

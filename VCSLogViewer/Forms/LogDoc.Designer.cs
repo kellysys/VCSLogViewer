@@ -43,6 +43,7 @@
             this.tbLog.TabIndex = 0;
             this.tbLog.Text = "";
             this.tbLog.WordWrap = false;
+            this.tbLog.Enter += new System.EventHandler(this.tbLog_Enter);
             // 
             // LogDoc
             // 

@@ -13,13 +13,9 @@ namespace VCSLogViewer.Forms
 {
     public partial class LogDoc : BaseDockContent
     {
-        public Action<string>? FindTextSelected;
-
         public LogDoc()
         {
             InitializeComponent();
-
-            tbLog.FindTextSelected += ((e) => FindTextSelected?.Invoke(e));
         }
 
         public void Init(string title, string path, bool removeDate = true, bool removeTimezone = true)
@@ -65,6 +61,30 @@ namespace VCSLogViewer.Forms
             tbLog.Init();
         }
 
+        public void Init2(string title, string path, bool removeDate = true, bool removeTimezone = true)
+        {
+            string date = "";
+            string timezone = "";
+            Text = title;
+
+            using var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+
+            tbLog.LoadFile(fs, RichTextBoxStreamType.PlainText);
+
+            date = tbLog.Text.Substring(0, 11);
+            timezone = tbLog.Text.Substring(24, 13);
+
+            string sss = tbLog.Text;
+            if (removeDate)
+                sss = sss.Replace(date, "");
+
+            if (removeTimezone)
+                sss = sss.Replace(timezone, "");
+
+            tbLog.Text = sss;
+            tbLog.Init();
+        }
+
         public void SetTheme(ThemeColor color)
         {
             switch (color)
@@ -91,6 +111,11 @@ namespace VCSLogViewer.Forms
         public void FindPrev(string str)
         {
             tbLog.FindPrev(str);
+        }
+
+        private void tbLog_Enter(object sender, EventArgs e)
+        {
+            LogService.Instance.ActionPsitionChanged(tbLog, tbLog.SelectionStart, tbLog.SelectionLength, 0);
         }
     }
 }

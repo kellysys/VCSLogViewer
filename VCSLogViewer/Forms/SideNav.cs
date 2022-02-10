@@ -20,6 +20,14 @@ namespace VCSLogViewer.Forms
         public SideNav()
         {
             InitializeComponent();
+
+            LogService.Instance.FindTextSelected += ((sender, e) =>
+            {
+                Invoke(new MethodInvoker(delegate
+                {
+                    tbFindText.Text = e;
+                }));
+            });
         }
 
         public void Init(DockPanel d)
@@ -83,16 +91,10 @@ namespace VCSLogViewer.Forms
                     Cursor = Cursors.WaitCursor;
 
                     LogDoc ld = new LogDoc();
-                    ld.Init(fm.Name, fm.Path);
+                    ld.Init2(fm.Name, fm.Path);
                     ld.SetTheme(ThemeColor.Default);
                     ld.Show(dock, DockState.Document);
-                    ld.FindTextSelected += ((e) =>
-                    {
-                        Invoke(new MethodInvoker(delegate
-                        {
-                            tbFindText.Text = e;
-                        }));
-                    });
+
                 }
             }
             catch (Exception ex)
