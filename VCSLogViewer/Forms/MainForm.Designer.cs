@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lbFiles = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -63,13 +64,12 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.lbFiles, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.dockPanel1, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lbFiles, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dockPanel1, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 27);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -83,7 +83,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbFiles.FormattingEnabled = true;
             this.lbFiles.ItemHeight = 15;
-            this.lbFiles.Location = new System.Drawing.Point(3, 33);
+            this.lbFiles.Location = new System.Drawing.Point(3, 3);
             this.lbFiles.Name = "lbFiles";
             this.lbFiles.Size = new System.Drawing.Size(194, 289);
             this.lbFiles.TabIndex = 2;
@@ -95,9 +95,9 @@
             this.panel1.Controls.Add(this.btnFindNext);
             this.panel1.Controls.Add(this.tbFindText);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 333);
+            this.panel1.Location = new System.Drawing.Point(3, 303);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(194, 200);
+            this.panel1.Size = new System.Drawing.Size(194, 230);
             this.panel1.TabIndex = 4;
             // 
             // btnFindPrev
@@ -133,12 +133,12 @@
             this.tableLayoutPanel1.SetColumnSpan(this.dockPanel1, 2);
             this.dockPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dockPanel1.DockBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.dockPanel1.Location = new System.Drawing.Point(203, 33);
+            this.dockPanel1.Location = new System.Drawing.Point(203, 3);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.Padding = new System.Windows.Forms.Padding(6);
             this.tableLayoutPanel1.SetRowSpan(this.dockPanel1, 2);
             this.dockPanel1.ShowAutoHideContentOnHover = false;
-            this.dockPanel1.Size = new System.Drawing.Size(896, 500);
+            this.dockPanel1.Size = new System.Drawing.Size(896, 530);
             this.dockPanel1.TabIndex = 5;
             this.dockPanel1.Theme = this.vS2015DarkTheme1;
             // 
@@ -236,6 +236,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Log Viewer";
