@@ -13,7 +13,7 @@ namespace VCSLogViewer.Forms
 {
     public partial class LogDoc : BaseDockContent
     {
-        public Action<string> FindTextSelected;
+        public Action<string>? FindTextSelected;
 
         public LogDoc()
         {

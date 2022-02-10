@@ -9,17 +9,18 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using VCSLogViewer.Models;
 
 namespace VCSLogViewer.Controls
 {
     internal class LogTextBox : RichTextBox
     {
-        public Action<string> FindTextSelected;
+        public Action<string>? FindTextSelected;
 
         private Color backColor = Color.White;
         private Color foreColor = Color.Black;
 
-        private Dictionary<string, Color> ColorDic = new Dictionary<string, Color>();
+        private Dictionary<string, BackColor> ColorDic = new Dictionary<string, BackColor>();
         private ConcurrentQueue<int> IndexQ = new ConcurrentQueue<int>();
 
         private const int MaxFindLength = 3;
@@ -288,7 +289,7 @@ namespace VCSLogViewer.Controls
                 if (ColorDic.ContainsKey(SelectedText))
                     ColorDic.Remove(SelectedText);
 
-                ColorDic.Add(SelectedText, color);
+                ColorDic.Add(SelectedText, new BackColor() { MyColor = color });
 
                 (SavedFirstIndex, SavedLastIndex) = GetLayoutIndex();
                 IndexQ.Enqueue(SavedFirstIndex);
@@ -367,9 +368,13 @@ namespace VCSLogViewer.Controls
 
                     while (match.Success)
                     {
-                        SelectionStart = match.Index;
-                        SelectionLength = match.Length;
-                        SelectionBackColor = dic.Value;
+                        if (!dic.Value.SelectedBefore(match.Index, match.Length))
+                        {
+                            SelectionStart = match.Index;
+                            SelectionLength = match.Length;
+                            SelectionBackColor = dic.Value.MyColor;
+                            dic.Value.SetRange(match.Index, match.Length);
+                        }
 
                         match = match.NextMatch();
                     }
@@ -385,7 +390,7 @@ namespace VCSLogViewer.Controls
                 {
                     SelectionLength = 0;
                 }
-                
+
                 DebugLog($"Refreshed ({first}-{last})");
             }
             catch (Exception ex)
