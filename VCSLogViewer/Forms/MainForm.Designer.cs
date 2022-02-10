@@ -37,6 +37,8 @@
             this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dIOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +62,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.windowsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1102, 24);
@@ -79,14 +82,14 @@
             // openFolderToolStripMenuItem
             // 
             this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
-            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.openFolderToolStripMenuItem.Text = "&Open Folder";
             this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(140, 22);
             this.toolStripMenuItem1.Text = "&Exit";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
@@ -103,6 +106,21 @@
             this.dockPanel1.Size = new System.Drawing.Size(1102, 542);
             this.dockPanel1.TabIndex = 5;
             this.dockPanel1.Theme = this.vS2015DarkTheme1;
+            // 
+            // windowsToolStripMenuItem
+            // 
+            this.windowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dIOToolStripMenuItem});
+            this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
+            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.windowsToolStripMenuItem.Text = "Windows";
+            // 
+            // dIOToolStripMenuItem
+            // 
+            this.dIOToolStripMenuItem.Name = "dIOToolStripMenuItem";
+            this.dIOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dIOToolStripMenuItem.Text = "DIO";
+            this.dIOToolStripMenuItem.Click += new System.EventHandler(this.dIOToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -136,5 +154,7 @@
         private WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme vS2015DarkTheme1;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
         private ToolStripStatusLabel posStatusLabel;
+        private ToolStripMenuItem windowsToolStripMenuItem;
+        private ToolStripMenuItem dIOToolStripMenuItem;
     }
 }

@@ -40,5 +40,11 @@ namespace VCSLogViewer
         {
             Close();
         }
+
+        private void dIOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DIONav dio = new DIONav();
+            dio.Show(dockPanel1, DockState.DockRight);
+        }
     }
 }
