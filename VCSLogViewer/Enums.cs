@@ -13,6 +13,34 @@ namespace VCSLogViewer
         Dark2
     }
 
+    public enum DI96
+    {
+        DI_0, DI_1, DI_2, DI_3, DI_4, DI_5, DI_6, DI_7, DI_8, DI_9,
+        DI_10, DI_11, DI_12, DI_13, DI_14, DI_15, DI_16, DI_17, DI_18, DI_19,
+        DI_20, DI_21, DI_22, DI_23, DI_24, DI_25, DI_26, DI_27, DI_28, DI_29,
+        DI_30, DI_31, DI_32, DI_33, DI_34, DI_35, DI_36, DI_37, DI_38, DI_39,
+        DI_40, DI_41, DI_42, DI_43, DI_44, DI_45, DI_46, DI_47, DI_48, DI_49,
+        DI_50, DI_51, DI_52, DI_53, DI_54, DI_55, DI_56, DI_57, DI_58, DI_59,
+        DI_60, DI_61, DI_62, DI_63, DI_64, DI_65, DI_66, DI_67, DI_68, DI_69,
+        DI_70, DI_71, DI_72, DI_73, DI_74, DI_75, DI_76, DI_77, DI_78, DI_79,
+        DI_80, DI_81, DI_82, DI_83, DI_84, DI_85, DI_86, DI_87, DI_88, DI_89,
+        DI_90, DI_91, DI_92, DI_93, DI_94, DI_95
+    }
+
+    public enum DO96
+    {
+        DO_0, DO_1, DO_2, DO_3, DO_4, DO_5, DO_6, DO_7, DO_8, DO_9,
+        DO_10, DO_11, DO_12, DO_13, DO_14, DO_15, DO_16, DO_17, DO_18, DO_19,
+        DO_20, DO_21, DO_22, DO_23, DO_24, DO_25, DO_26, DO_27, DO_28, DO_29,
+        DO_30, DO_31, DO_32, DO_33, DO_34, DO_35, DO_36, DO_37, DO_38, DO_39,
+        DO_40, DO_41, DO_42, DO_43, DO_44, DO_45, DO_46, DO_47, DO_48, DO_49,
+        DO_50, DO_51, DO_52, DO_53, DO_54, DO_55, DO_56, DO_57, DO_58, DO_59,
+        DO_60, DO_61, DO_62, DO_63, DO_64, DO_65, DO_66, DO_67, DO_68, DO_69,
+        DO_70, DO_71, DO_72, DO_73, DO_74, DO_75, DO_76, DO_77, DO_78, DO_79,
+        DO_80, DO_81, DO_82, DO_83, DO_84, DO_85, DO_86, DO_87, DO_88, DO_89,
+        DO_90, DO_91, DO_92, DO_93, DO_94, DO_95
+    }
+
     public enum CMZ_INPUT_CHJS
     {
         UBG01_DETECT_01,

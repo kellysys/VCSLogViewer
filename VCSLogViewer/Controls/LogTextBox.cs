@@ -33,6 +33,8 @@ namespace VCSLogViewer.Controls
         private int SavedLastIndex;
         private int StartLastSize;
 
+        private bool IsDIO;
+
         public LogTextBox()
         {
             WordWrap = false;
@@ -135,7 +137,12 @@ namespace VCSLogViewer.Controls
 
         protected override void OnSelectionChanged(EventArgs e)
         {
-            LogService.Instance.ActionPsitionChanged(this, SelectionStart, SelectionLength, GetLineFromCharIndex(SelectionStart));
+            int line = GetLineFromCharIndex(SelectionStart);
+
+            if (IsDIO)
+                LogService.Instance.ActionDIOSelected(this, Lines[line]);
+
+            LogService.Instance.ActionPsitionChanged(this, SelectionStart, SelectionLength, line);
             base.OnSelectionChanged(e);
         }
 
@@ -197,6 +204,9 @@ namespace VCSLogViewer.Controls
 
             Cursor = Cursors.Default;
             DebugLog("End Init");
+
+            IsDIO = Path.GetFileName(path).Contains("DIO");
+
             UpdateIndex();
         }
 

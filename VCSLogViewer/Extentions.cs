@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace VCSLogViewer
 {
@@ -110,4 +111,12 @@ namespace VCSLogViewer
 		}
 	}
 
+	public static class Extensions 
+	{
+		public static void DoubleBuffered(this Control control, bool enabled)
+		{
+			var prop = control.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+			prop.SetValue(control, enabled, null);
+		}
+	}
 }

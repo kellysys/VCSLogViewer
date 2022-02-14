@@ -33,6 +33,7 @@
             this.cbVCSType = new System.Windows.Forms.ComboBox();
             this.ioList1 = new VCSLogViewer.Controls.IOList();
             this.ioList2 = new VCSLogViewer.Controls.IOList();
+            this.tbTime = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,12 +44,14 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.cbVCSType, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.ioList1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.ioList2, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.ioList1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.ioList2, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tbTime, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(387, 583);
@@ -77,6 +80,7 @@
             this.cbVCSType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbVCSType.FormattingEnabled = true;
             this.cbVCSType.Items.AddRange(new object[] {
+            "DIO",
             "CHJS",
             "WUXI"});
             this.cbVCSType.Location = new System.Drawing.Point(196, 3);
@@ -93,9 +97,9 @@
             this.ioList1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.ioList1.FormattingEnabled = true;
             this.ioList1.ItemHeight = 15;
-            this.ioList1.Location = new System.Drawing.Point(3, 33);
+            this.ioList1.Location = new System.Drawing.Point(3, 63);
             this.ioList1.Name = "ioList1";
-            this.ioList1.Size = new System.Drawing.Size(187, 544);
+            this.ioList1.Size = new System.Drawing.Size(187, 514);
             this.ioList1.TabIndex = 0;
             // 
             // ioList2
@@ -106,10 +110,19 @@
             this.ioList2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.ioList2.FormattingEnabled = true;
             this.ioList2.ItemHeight = 15;
-            this.ioList2.Location = new System.Drawing.Point(196, 33);
+            this.ioList2.Location = new System.Drawing.Point(196, 63);
             this.ioList2.Name = "ioList2";
-            this.ioList2.Size = new System.Drawing.Size(188, 544);
+            this.ioList2.Size = new System.Drawing.Size(188, 514);
             this.ioList2.TabIndex = 0;
+            // 
+            // tbTime
+            // 
+            this.tbTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.tbTime, 2);
+            this.tbTime.Location = new System.Drawing.Point(3, 33);
+            this.tbTime.Name = "tbTime";
+            this.tbTime.Size = new System.Drawing.Size(381, 23);
+            this.tbTime.TabIndex = 3;
             // 
             // DIONav
             // 
@@ -131,5 +144,6 @@
         private ComboBox cbVCSType;
         private Controls.IOList ioList1;
         private Controls.IOList ioList2;
+        private TextBox tbTime;
     }
 }

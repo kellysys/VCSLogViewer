@@ -32,10 +32,14 @@ namespace VCSLogViewer
 
         public Action<LogTextBox, string>? FindTextSelected;
         public Action<LogTextBox, int, int, int>? PsitionChanged;
+        public Action<LogTextBox, string> DIOSelected;
 
         public void ActionFindTextSelected(LogTextBox sender, string s) => FindTextSelected?.Invoke(sender, s);
 
         public void ActionPsitionChanged(LogTextBox sender, int index, int length, int lineNumber) => PsitionChanged?.Invoke(sender, index, length, lineNumber);
+
+        public void ActionDIOSelected(LogTextBox sender, string dio) => DIOSelected?.Invoke(sender, dio);
+
 
     }
 }
