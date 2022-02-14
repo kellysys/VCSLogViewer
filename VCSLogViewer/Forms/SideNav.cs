@@ -46,6 +46,16 @@ namespace VCSLogViewer.Forms
                 List<FileModel> files = new List<FileModel>();
 
                 Text = dialog.SelectedPath;
+
+                foreach (var f in Directory.GetFiles(dialog.SelectedPath))
+                {
+                    files.Add(new FileModel()
+                    {
+                        Name = Path.GetFileName(f),
+                        Path = f
+                    });
+                }
+
                 foreach (var dir in Directory.GetDirectories(dialog.SelectedPath))
                 {
                     foreach (var f in Directory.GetFiles(dir))
