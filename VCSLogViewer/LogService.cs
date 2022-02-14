@@ -12,7 +12,7 @@ namespace VCSLogViewer
     {
         #region Singletone
 
-        private static LogService instance;
+        private static LogService? instance;
 
         public static LogService Instance
         {
@@ -32,7 +32,7 @@ namespace VCSLogViewer
 
         public Action<LogTextBox, string>? FindTextSelected;
         public Action<LogTextBox, int, int, int>? PsitionChanged;
-        public Action<LogTextBox, string> DIOSelected;
+        public Action<LogTextBox, string>? DIOSelected;
 
         public void ActionFindTextSelected(LogTextBox sender, string s) => FindTextSelected?.Invoke(sender, s);
 

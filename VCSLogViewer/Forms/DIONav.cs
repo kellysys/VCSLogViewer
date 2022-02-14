@@ -97,7 +97,7 @@ namespace VCSLogViewer.Forms
 
     public record DIO
     {
-        public string Name { get; init; }
+        public string? Name { get; init; }
         public bool Value { get; set; }
     }
 }

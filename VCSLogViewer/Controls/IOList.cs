@@ -35,12 +35,14 @@ namespace VCSLogViewer.Controls
 
                     e.Graphics.FillRectangle(ioBrush, e.Bounds);
 
-                    e.Graphics.DrawString(dio.Name,
+                    if (e.Font != null)
+                    {
+                        e.Graphics.DrawString(dio.Name,
                                     e.Font,
                                     Brushes.Black,
                                     e.Bounds,
                                     StringFormat.GenericDefault);
-
+                    }
                     e.Graphics.DrawRectangle(p, e.Bounds);
                 }
                 //e.DrawFocusRectangle();
