@@ -126,17 +126,7 @@ namespace VCSLogViewer
         DI_76,
         DI_77,
         DI_78,
-        DI_79,
-
-        LFT_PIO_1 = EQ_PIO_1_L_REQ,
-        LFT_PIO_2,
-        LFT_PIO_3,
-        LFT_PIO_4,
-        LFT_PIO_5,
-        LFT_PIO_6,
-        LFT_PIO_7,
-        LFT_PIO_8,
-        LFT_PIO_9
+        DI_79
     }
 
     public enum CMZ_OUTPUT_CHJS
@@ -233,17 +223,7 @@ namespace VCSLogViewer
         DO_84,
         DO_85,
         DO_86,
-        DO_87,
-
-        LFT_PIO_1 = EQ_PIO_01_VALID,
-        LFT_PIO_2,
-        LFT_PIO_3,
-        LFT_PIO_4,
-        LFT_PIO_5,
-        LFT_PIO_6,
-        LFT_PIO_7,
-        LFT_PIO_8,
-        LFT_PIO_9
+        DO_87
     }
 
     public enum CMZ_INPUT_WUXI
@@ -330,16 +310,7 @@ namespace VCSLogViewer
         DI_79,
         ROTATE_PLUS_LIMIT,
         ROTATE_HOME,
-        ROTATE_MINUS_LIMIT,
-        LFT_PIO_1 = EQ_PIO_1_L_REQ,
-        LFT_PIO_2,
-        LFT_PIO_3,
-        LFT_PIO_4,
-        LFT_PIO_5,
-        LFT_PIO_6,
-        LFT_PIO_7,
-        LFT_PIO_8,
-        LFT_PIO_9
+        ROTATE_MINUS_LIMIT
     }
 
     public enum CMZ_OUTPUT_WUXI
@@ -431,15 +402,6 @@ namespace VCSLogViewer
         DO_84,
         DO_85,
         DO_86,
-        DO_87,
-        LFT_PIO_1 = EQ_PIO_01_VALID,
-        LFT_PIO_2,
-        LFT_PIO_3,
-        LFT_PIO_4,
-        LFT_PIO_5,
-        LFT_PIO_6,
-        LFT_PIO_7,
-        LFT_PIO_8,
-        LFT_PIO_9
+        DO_87
     }
 }
