@@ -76,6 +76,10 @@ namespace VCSLogViewer.Forms
             {
                 UpdateList<CMZ_INPUT_WUXI, CMZ_OUTPUT_WUXI>();
             }
+            else if (cbVCSType.SelectedIndex == 3)
+            {
+                UpdateList<CMZ_INPUT_SKS, CMZ_OUTPUT_SKS>();
+            }
         }
 
         private void UpdateList<TI, TO>()

@@ -36,7 +36,7 @@ namespace VCSLogViewer.Forms
             dock = d;
         }
 
-        public void OpenFolder()
+        public void OpenFolder2()
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             var result = dialog.ShowDialog();
@@ -72,6 +72,68 @@ namespace VCSLogViewer.Forms
                 lbFiles.DisplayMember = "Name";
                 lbFiles.ValueMember = "Path";
                 lbFiles.DataSource = files;
+            }
+        }
+
+        public void OpenFolder()
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            var result = dialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                List<FileModel> files = new List<FileModel>();
+
+                Text = dialog.SelectedPath;
+
+                foreach (var f in Directory.GetFiles(dialog.SelectedPath))
+                {
+                    files.Add(new FileModel()
+                    {
+                        Name = Path.GetFileName(f),
+                        Path = f
+                    });
+                }
+
+                foreach (var dir in Directory.GetDirectories(dialog.SelectedPath))
+                {
+                    DirFileSearch(files, dir);
+                }
+
+                lbFiles.DataSource = null;
+                lbFiles.DisplayMember = "Name";
+                lbFiles.ValueMember = "Path";
+                lbFiles.DataSource = files;
+            }
+        }
+
+        void DirFileSearch(List<FileModel> totalFiles, string path)
+        {
+            try
+            {
+                string[] dirs = Directory.GetDirectories(path);
+                string[] files = Directory.GetFiles(path, $"*.log");
+
+                foreach (string f in files)
+                {
+                    totalFiles.Add(new FileModel()
+                    {
+                        Name = Path.GetFileName(f),
+                        Path = f
+                    });
+                }
+
+                if (dirs.Length > 0)
+                {
+                    foreach (string dir in dirs)
+                    {
+                        DirFileSearch(totalFiles, dir);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
