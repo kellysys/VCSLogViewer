@@ -80,6 +80,10 @@ namespace VCSLogViewer.Forms
             {
                 UpdateList<CMZ_INPUT_SKS, CMZ_OUTPUT_SKS>();
             }
+            else if (cbVCSType.SelectedIndex == 4)
+            {
+                UpdateList<CMZ_INPUT_SKI_POLAND, CMZ_OUTPUT_SKI_POLAND>();
+            }
         }
 
         private void UpdateList<TI, TO>()

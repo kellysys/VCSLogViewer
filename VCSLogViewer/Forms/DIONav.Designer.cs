@@ -83,7 +83,8 @@
             "DIO",
             "CHJS",
             "WUXI",
-            "SKs"});
+            "SKs",
+            "SKI_Poland"});
             this.cbVCSType.Location = new System.Drawing.Point(196, 3);
             this.cbVCSType.Name = "cbVCSType";
             this.cbVCSType.Size = new System.Drawing.Size(188, 23);
